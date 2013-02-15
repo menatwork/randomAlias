@@ -58,7 +58,7 @@ class ContentRandomAlias extends ContentElement
             }
             else
             {
-                $arrShuffelElements[$i] = $this->getRaondomItem($arrRandomElements);
+                $arrShuffelElements[$i] = $this->getRandomItem($arrRandomElements);
             }
         }
 
@@ -112,7 +112,7 @@ class ContentRandomAlias extends ContentElement
      * @param array $arrElements
      * @return mixed
      */
-    protected function getRaondomItem(&$arrElements)
+    protected function getRandomItem(&$arrElements)
     {
         $mixKey = array_rand($arrElements, 1);
 
