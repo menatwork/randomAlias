@@ -92,8 +92,20 @@ class ContentRandomAlias extends ContentElement
             $objElement->space = $this->space;
             $objElement->cssID = $this->cssID;
 
-            $strReturn .= $objElement->generate();
-        }
+            $strElement = $objElement->generate();
+            
+            // HOOK: call the hooks for randomAliasCe
+            if (isset($GLOBALS['TL_HOOKS']['randomAliasCe']) && is_array($GLOBALS['TL_HOOKS']['randomAliasCe']))
+            {
+                foreach ($GLOBALS['TL_HOOKS']['randomAliasCe'] as $callback)
+                {
+                    $this->import($callback[0]);
+                    $strElement = $this->$callback[0]->$callback[1]($this, $strElement, $objElement, $key, $value);
+                }
+            }            
+            
+            $strReturn .= $strElement;
+        }       
 
         return $strReturn;
     }
